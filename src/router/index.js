@@ -8,7 +8,7 @@ export default new createRouter({
   routes: [
     {
       path: '/',
-      redirect: 'dao/0/',
+      // redirect: 'dao/0/',
     },
     {
       path: '/dao/:assetId/',
