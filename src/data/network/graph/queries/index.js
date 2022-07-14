@@ -3,7 +3,7 @@
 // } from "@apollo/client/core"
 import gql from "graphql-tag";
 
-
+//Common Proposal Types Query Section
 const UPGRADE_PROPOSAL_QUERY = gql `
   query {
     upgradeProposals {
@@ -115,6 +115,8 @@ const PARTICIPANT_REMOVAL_PROPOSAL_QUERY = gql`
   }
 `
 
+
+// Frabric Specific Proposal Type Query Section
 const PARTICIPANT_PROPOSAL_QUERY = gql`
   query {
     participantProposals {
@@ -241,6 +243,7 @@ const THREAD_PROPOSAL_PROPOSALS_QUERY = gql`
   }
 `
 
+// Thread Proposal Types Query Section
 const DESCRIPTOR_CHANGE_PROPOSAL_QUERY = gql`
   query {
     desriptorChangeProposals {

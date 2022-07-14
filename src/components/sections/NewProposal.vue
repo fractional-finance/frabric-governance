@@ -115,7 +115,7 @@ export default {
 
     publish() {
       if (this.title.length < 1 || this.description.length < 1) {
-        return;
+        return;b
       }
 
       this.createProposal({
