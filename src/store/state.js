@@ -17,7 +17,7 @@ function state() {
     },
     platform: {
       assets: [],
-      proposals: new Map()
+      proposals: []
     },
     interface: {
       alert: null
@@ -163,14 +163,12 @@ const actions = {
   async refreshProposalsDataForAsset(context, params) {
     context.dispatch("refreshMarketplaceData")
 
-    let assetId = params.assetId
+    // let assetId = params.assetId
 
-    let assetProposals = await dao.getProposalsForAsset(assetId)
+    let assetProposals = await dao.getProposalsForAsset()
+    console.log("11111111122222222", assetProposals)
 
-    console.log("New Proposals")
-    console.log(assetProposals)
-
-    context.commit("setProposalsForAsset", { assetId: assetId, proposals: assetProposals })
+    context.commit("setProposalsForAsset", assetProposals)
   },
   /*
     AT THE MOMENT THIS IS USING THE ID, BUT WE NEED TO PASS THE ADDRESS TO THE FUNCTION
@@ -266,8 +264,8 @@ const mutations = {
     state.platform.assets = assets
   },
 
-  setProposalsForAsset(state, { proposals, assetId }) {
-    state.platform.proposals.set(assetId, proposals)
+  setProposalsForAsset(state, proposals) {
+    state.platform.proposals = proposals
   },
 
   setAlert(state, alert) {

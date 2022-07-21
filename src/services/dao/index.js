@@ -37,8 +37,8 @@ class DAO {
     var proposals = await this.graphQLAPIClient
       .query(
         ALL_ASSET_PROPOSALS_QUERY,
-        { assetId },
-        (mapper, response) => { return mapper.mapProposals(response.data.proposals) }
+        {},
+        (mapper, response) => { return mapper.mapProposals(response.data.paperProposals) }
       )
 
     console.log("Mapped proposals:")
@@ -48,25 +48,26 @@ class DAO {
 
     const proposalDataURIArray = proposals
       .map(proposal => proposal.dataURI)
-    let proposalOffchainDataArray = (
-      await this.storageNetwork
-        .getFiles(proposalDataURIArray.map(uri => CommonUtils.pathFromURL(uri)))
-    )
+    // let proposalOffchainDataArray = (
+    //   await this.storageNetwork
+    //     .getFiles(proposalDataURIArray.map(uri => CommonUtils.pathFromURL(uri)))
+    // )
 
-    console.log("Off-chain data:", proposalOffchainDataArray);
+    // console.log("Off-chain data:", proposalOffchainDataArray);
 
-    if (proposalOffchainDataArray.length != proposals.length) {
-      throw ("Off-chain data count doesn't match the on-chain data")
-    }
+    // if (proposalOffchainDataArray.length != proposals.length) {
+    //   throw ("Off-chain data count doesn't match the on-chain data")
+    // }
 
     for (var i = 0; i < proposals.length; i++) {
       let proposal = proposals[i]
-      let data = proposalOffchainDataArray[i]
+      // let data = proposalOffchainDataArray[i]
+      let data = [];
 
       let completeProposal = new Proposal(
         proposal.id,
         proposal.creatorAddress,
-        proposal.dataURI,
+        proposal.info,
         proposal.startTimestamp,
         proposal.endTimestamp,
         proposal.votes,

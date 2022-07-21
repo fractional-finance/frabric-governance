@@ -50,7 +50,9 @@ class Market {
       .query(
         ALL_ASSETS_QUERY, 
         {}, 
-        (mapper, response) => { return mapper.mapAssets(response.data.deployedAssets) }
+        (mapper, response) => {
+          return mapper.mapAssets(response.data.frabrics[0]);
+        }
       )
 
     console.log("Mapped assets:")

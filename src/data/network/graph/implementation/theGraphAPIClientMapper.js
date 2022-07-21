@@ -55,17 +55,16 @@ class TheGraphAPIMapper extends GraphQLAPIMapper {
     if (!rawProposals || rawProposals.length < 1) {
       return []
     }
-
     return rawProposals
       .map(rawProposal => {
-        const votes = this.mapVotes(rawProposal.votes)
+        const votes = this.mapVotes(rawProposal.baseProposal.votes)
 
         return new Proposal(
-          rawProposal.id,
-          rawProposal.creator,
-          rawProposal.dataURI,
-          rawProposal.startTimestamp,
-          rawProposal.endTimestamp,
+          rawProposal.baseProposal.id,
+          rawProposal.baseProposal.creator,
+          rawProposal.baseProposal.info,
+          rawProposal.baseProposal.startTimestamp,
+          rawProposal.baseProposal.endTimestamp,
           votes
         )
       })

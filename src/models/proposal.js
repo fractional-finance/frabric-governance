@@ -14,7 +14,7 @@ class Proposal {
   constructor(
     id,
     creatorAddress,
-    dataURI,
+    info,
     startTimestamp,
     endTimestamp,
     votes,
@@ -23,7 +23,7 @@ class Proposal {
   ) {
     this.id = id
     this.creatorAddress = creatorAddress
-    this.dataURI = dataURI
+    this.info = info
     this.startTimestamp = startTimestamp
     this.endTimestamp = endTimestamp
     this.votes = votes,

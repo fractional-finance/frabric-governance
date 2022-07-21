@@ -35,6 +35,38 @@ const THREAD_PROPOSAL_QUERY = gql`
   }
 `
 
+const ALL_ASSET_PROPOSALS_QUERY = gql`
+  query PaperProposals {
+    paperProposals {
+      id
+      baseProposal {
+        id
+        thread {
+          id
+        }
+        frabric {
+          id
+        }
+        creator
+        type
+        state
+        votes {
+          id
+          voter
+          voteDirection
+          count
+        }
+        info
+        startTimestamp
+        endTimestamp
+      }
+      frabric {
+        id
+      }
+    }
+  }
+`;
+
 
 
 
@@ -664,6 +696,6 @@ query frabrics
   }  
 `
 export {
-  
+  ALL_ASSET_PROPOSALS_QUERY,
   ALL_ASSETS_QUERY
 }
