@@ -166,7 +166,6 @@ const actions = {
     // let assetId = params.assetId
 
     let assetProposals = await dao.getProposalsForAsset()
-    console.log("11111111122222222", assetProposals)
 
     context.commit("setProposalsForAsset", assetProposals)
   },

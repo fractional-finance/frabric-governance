@@ -1,7 +1,7 @@
 <template>
     <section class="container is-max-widescreen mx-auto">
         <NewProposalCreate />
-        <div class="columns">
+        <div class="columns mt-5 mb-5">
             <div class="column">
                 <ProposalList title="Active Proposals" />
             </div>
