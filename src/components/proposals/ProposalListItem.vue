@@ -1,23 +1,86 @@
 <template>
-  <div v-if="proposal" class="has-full-borders has-radius-md panel-dark-gray">
+  <div v-if="proposal" class="proposal-panel has-radius-md">
     <div class="container">
       <div class="row">
-        <strong>{{ endDateString }}</strong
-        >, (<strong>{{ timeRemainingString }}</strong> left)
+        <strong v-if="ended" class="time">{{ endDateString }}</strong>
+        <strong v-else class="time">{{ timeRemainingString }}</strong>
       </div>
       <div class="row">
-        <h2 class="is-size-3 pl-5 pr-5 pt-4">Open space, for relaxing with  a fountain</h2>
+        <h2 class="title">Open space, for relaxing with  a fountain</h2>
+      </div>
+      <div class="row pt-2">
+        <span class="description">It is a long established fact that a reader will be distract ed by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution.</span>
+      </div>
+      <div class="row button-wrapper mt-3">
+        <div>
+          <a class="link" href="#">https://chat.thefrabric.com/</a>
+          <div>
+            <div class="quantum-state" />
+            <span>quantum Not reached</span>
+          </div>
+        </div>
+        <div>
+          <button class="button title is-mediumBlue">Vote</button>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
+<style scoped>
+.time {
+  color: #968EFF;
+  font-family: Poppins;
+  font-size: 20px;
+  font-weight: 400;
+}
+.proposal-panel {
+  padding: 1rem;
+  background-color: #1D1B22 !important;
+}
+.title {
+  font-family: Poppins;
+  font-size: 20px;
+  font-weight: 600;
+  color: #FFFFFF;
+}
+.description {
+  font-family: Poppins;
+  font-size: 15px;
+  font-weight: 400;
+}
+.link {
+  font-family: Poppins;
+  font-size: 15px;
+  font-weight: 400;
+  color: #968EFF;
+}
+.button-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+.quantum-state {
+  height: 25px;
+  width: 25px;
+  left: 11px;
+  top: 216px;
+  border-radius: 50%;
+  background-color: red;
+  border-radius: 0px;
+}
+</style>
+
 <script>
 
 import { mapActions, mapGetters } from "vuex";
 import Proposal from "../../models/proposal";
+import Button from "../views/common/Button.vue";
+
 export default {
   name: "ProposalListItem",
+  components: {
+    // Button,
+  },
   props: {
     proposal: {
       type: Proposal,
@@ -37,6 +100,7 @@ export default {
     endDateString() {
       return this.dateStringForTimestamp(this.proposal.endTimestamp);
     },
+    
     ended() {
       let now = new Date().getTime() / 1000;
       let t = this.proposal.endTimestamp - now;
@@ -61,7 +125,7 @@ export default {
         function () {
           let now = new Date().getTime() / 1000;
 
-          let t = this.proposal.endTimestamp - now;
+          let t = now - this.proposal.endTimestamp;
 
           if (t >= 0) {
             let days = Math.floor(t / (60 * 60 * 24));
@@ -69,7 +133,7 @@ export default {
             let mins = Math.floor((t % (60 * 60)) / 60);
             let secs = Math.floor(t % 60);
 
-            this.timeRemainingString = `${days}d, ${hours}h, ${mins}m, ${secs}s`;
+            this.timeRemainingString = `${days}d, ${hours}h, ${mins}m, ${secs}s left`;
           } else {
             this.timeRemainingString = "The voting is over";
           }

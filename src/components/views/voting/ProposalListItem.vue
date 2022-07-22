@@ -151,9 +151,7 @@ export default {
         function () {
           let now = new Date().getTime() / 1000;
 
-          // let t = this.proposal.endTimestamp - now;
-          let t = now - this.proposal.endTimestamp;
-          console.log("====================");
+          let t = this.proposal.endTimestamp - now;
 
           if (t >= 0) {
             let days = Math.floor(t / (60 * 60 * 24));

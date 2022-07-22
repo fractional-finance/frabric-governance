@@ -15,10 +15,6 @@ input {
   border-bottom: #D6FCFE 1px solid !important;
 }
 
-.panel-dark-gray {
-  background-color: #1D1B22 !important;
-}
-
 /*! bulma.io v0.9.3 | MIT License | github.com/jgthms/bulma */
 /* Bulma Utilities */
 .pagination-previous,
