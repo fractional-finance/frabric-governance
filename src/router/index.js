@@ -3,6 +3,7 @@ import Voting from '@/components/sections/Voting.vue'
 import Proposal from '@/components/sections/Proposal.vue'
 import newPaperProposal from "@/components/proposals/newPaperProposal.vue"
 import newParticipantProposal from "@/components/proposals/newParticipantProposal.vue"
+import newUpgradeProposal from "@/components/proposals/newUpgradeProposal.vue"
 
 export default new createRouter({
   history: createWebHashHistory(),
@@ -39,6 +40,12 @@ export default new createRouter({
       name: 'newParticipantProposal',
       props: true,
       component: newParticipantProposal,
+    },
+    {
+      path: '/dao/:assetId/newUpgradeProposal',
+      name: 'newUpgradeProposal',
+      props: true,
+      component: newUpgradeProposal,
     },
   ],
 })

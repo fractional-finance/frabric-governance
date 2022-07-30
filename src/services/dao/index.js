@@ -5,6 +5,7 @@ import { VoteType } from "../../models/vote"
 import { GraphQLAPIClient, ALL_ASSET_PROPOSALS_QUERY } from "../../data/network/graph/graphQLAPIClient"
 import EthereumClient from "../../data/network/web3/ethereum/ethereumClient"
 import AssetContract from "../../data/network/web3/contracts/assetContract"
+import { ethers } from "ethers";
 
 // TODO: Should there be a single service instance per proposal?
 
@@ -146,6 +147,38 @@ class DAO {
     let status = await assetContract.proposeParticipant(participantType, participant, proposalURI)
 
     return status
+  }
+
+  async createUpgradeProposal(
+    assetAddress,
+    instanceAddress,
+    beaconAddress,
+    version,
+    codeAddress,
+    upgradeData,
+    title,
+    description,
+  ) {
+    const assetContract = new AssetContract(this.ethereumClient, assetAddress);
+    const ipfsPathBytes = await this.storageNetwork
+      .uploadAndGetPathAsBytes(
+        {
+          title: title,
+          description: description
+        }
+      );
+
+    const createUpgradeProposalTx = await assetContract.proposeUpgrade(
+      beaconAddress,
+      instanceAddress,
+      version,
+      codeAddress,
+      upgradeData,
+      ipfsPathBytes,
+    );
+
+    const txReciept = await createUpgradeProposalTx.wait();
+    return txReciept.status;
   }
 
   /**
